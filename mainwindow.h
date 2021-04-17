@@ -43,6 +43,7 @@ private:
 	void saveFile(const QString& fileName);
 
 	static const QString FILE_FORMAT;
+	static const QString PROGRAM_NAME;
 	QString currentFileName;
 	QString lastResourceFileName;
 };

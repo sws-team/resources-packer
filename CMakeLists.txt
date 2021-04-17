@@ -24,6 +24,7 @@ add_executable(${PROJECT_NAME}
     resourcesmodel.cpp
     dialogresource.ui
     mainwindow.ui
+    res.qrc
     ${RESOURCES_SOURCES}
     )
     

@@ -14,13 +14,14 @@
 #include <QStyleFactory>
 
 const QString MainWindow::FILE_FORMAT = QObject::tr("Resources file (*.dat)");
+const QString MainWindow::PROGRAM_NAME = QObject::tr("Resources Packer");
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	this->setWindowTitle(tr("Resources Packer"));
+	this->setWindowTitle(PROGRAM_NAME);
 	qApp->setStyle(QStyleFactory::create("fusion"));
 
 	settings = new QSettings(qApp->applicationDirPath() + "/settings.ini", QSettings::IniFormat, this);
@@ -65,6 +66,7 @@ void MainWindow::closeFile()
 {
 	model->clear();
 	currentFileName.clear();
+	setWindowTitle(PROGRAM_NAME);
 }
 
 void MainWindow::updateSelection()
@@ -98,6 +100,8 @@ void MainWindow::openFile(const QString &fileName)
 		modelResources.push_back(res);
 	}
 	model->setResources(modelResources);
+
+	setWindowTitle(PROGRAM_NAME + " - " + fileName);
 }
 
 void MainWindow::saveFile(const QString &fileName)

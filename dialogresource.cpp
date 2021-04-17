@@ -15,7 +15,7 @@ const QStringList DialogResource::RESOURCE_TYPES = QStringList()
 DialogResource::DialogResource(const bool change, QWidget *parent) :
 	QDialog(parent),
 	ui(new Ui::DialogResource)
-  ,m_change(change)
+	,m_change(change)
 {
 	ui->setupUi(this);
 	this->setWindowTitle(tr("Resources dialog"));
@@ -52,7 +52,7 @@ ModelResource DialogResource::resource() const
 	res.type = ui->cmb_type->currentIndex() + 1;
 	res.data = resourceData;
 	res.name = ui->edit_name->text();
-        res.description = ui->edit_description->toPlainText();
+	res.description = ui->edit_description->toPlainText();
 	return res;
 }
 
@@ -63,7 +63,11 @@ void DialogResource::on_button_browse_clicked()
 		return;
 	ui->edit_file->setText(fileName);
 	if (m_change)
-		ui->edit_name->setText(QFileInfo(fileName).baseName());
+	{
+		const QString baseName = QFileInfo(fileName).baseName();
+		ui->edit_name->setText(baseName);
+		ui->edit_description->setText(baseName);
+	}
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
