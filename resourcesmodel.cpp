@@ -1,5 +1,5 @@
 #include "resourcesmodel.h"
-#include "gameresource.h"
+#include "arcresource.h"
 
 #include <QDebug>
 #include <QPixmap>
@@ -58,17 +58,17 @@ QVariant ResourcesModel::data(const QModelIndex &index, int role) const
 		{
 			switch (res.type)
 			{
-			case GameResource::UNKNOWN:
+			case ArcEngine::UNKNOWN:
 				return tr("Unknown");
-			case GameResource::TEXTURE:
+			case ArcEngine::TEXTURE:
 				return tr("Texture");
-			case GameResource::SOUND:
+			case ArcEngine::SOUND:
 				return tr("Sound");
-			case GameResource::MUSIC:
+			case ArcEngine::MUSIC:
 				return tr("Music");
-			case GameResource::FONT:
+			case ArcEngine::FONT:
 				return tr("Font");
-			case GameResource::OTHER:
+			case ArcEngine::OTHER:
 				return tr("Other");
 			default:
 				break;
@@ -94,7 +94,7 @@ QVariant ResourcesModel::data(const QModelIndex &index, int role) const
 		{
 			switch (res.type)
 			{
-			case GameResource::TEXTURE:
+			case ArcEngine::TEXTURE:
 			{
 				QByteArray bytes;
 				bytes = QByteArray::fromBase64(res.data);

@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "gameresource.h"
+#include "arcresource.h"
 #include "modelresource.h"
 #include "resourcesmodel.h"
 #include "dialogresource.h"
@@ -89,8 +89,8 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::openFile(const QString &fileName)
 {
 	QList<ModelResource> modelResources;
-	const std::vector<GameResource::Resource> resources = GameResource::Resource::loadResources(fileName.toStdString());
-	for(const GameResource::Resource &resource : resources)
+	const std::vector<ArcEngine::Resource> resources = ArcEngine::Resource::loadResources(fileName.toStdString());
+	for(const ArcEngine::Resource &resource : resources)
 	{
 		ModelResource res;
 		res.type = resource.type;
@@ -106,18 +106,18 @@ void MainWindow::openFile(const QString &fileName)
 
 void MainWindow::saveFile(const QString &fileName)
 {
-	std::vector<GameResource::Resource> resources;
+	std::vector<ArcEngine::Resource> resources;
 	const QList<ModelResource> modelResources = model->resources();
 	foreach(const ModelResource& res, modelResources)
 	{
-		GameResource::Resource resource;
-		resource.type = static_cast<GameResource::RESOURCE_TYPE>(res.type);
+		ArcEngine::Resource resource;
+		resource.type = static_cast<ArcEngine::RESOURCE_TYPE>(res.type);
 		resource.data = res.data.toStdString();
 		resource.name = res.name.toStdString();
 		resource.description = res.description.toStdString();
 		resources.push_back(resource);
 	}
-	const bool result = GameResource::Resource::saveResources(fileName.toStdString(), resources);
+	const bool result = ArcEngine::Resource::saveResources(fileName.toStdString(), resources);
 	if (!result)
 		QMessageBox::critical(this, tr("Error"), tr("Error to save file"));
 }

@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 set(ENGINE_DIR ../Engine CACHE STRING "path to engine")
-include(${ENGINE_DIR}/Resources/resources.cmake)
+include(${ENGINE_DIR}/Resources/arcresources.cmake)
 
 add_executable(${PROJECT_NAME}
     main.cpp
